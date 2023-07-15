@@ -1,6 +1,6 @@
 import requests
 from log_writer import log
-from time import ctime
+import time
 
 def get_status(url, uuid, remote_uuid, apikey):
     api_url = url + "/api/instance"
@@ -23,7 +23,7 @@ def get_status(url, uuid, remote_uuid, apikey):
         data = json_response["data"]
         status = data["status"]
 
-        tempLog = "[" + ctime() + "] (api.py/get_status) Successful 200, status=" + str(status) + ",data="
+        tempLog = "[" + time.ctime() + "] (api.py/get_status) Successful 200, status=" + str(status) + ",data="
         log(tempLog)
         log(data)
 
@@ -31,7 +31,7 @@ def get_status(url, uuid, remote_uuid, apikey):
     else:
         print("failed: ", response)
 
-        tempLog = "[" + ctime() + "] (api.py/get_status) Failed " + response.status_code
+        tempLog = "[" + time.ctime() + "] (api.py/get_status) Failed " + response.status_code
         log(tempLog)
 
         return "failed"
@@ -54,7 +54,7 @@ def start_app(url, uuid, remote_uuid, apikey):
     if response.status_code == 200:
         data = json_response["data"]
 
-        tempLog = "[" + ctime() + "] (api.py/start_app) Successful 200, data="
+        tempLog = "[" + time.ctime() + "] (api.py/start_app) Successful 200, data="
         log(tempLog)
         log(data)
 
@@ -62,7 +62,7 @@ def start_app(url, uuid, remote_uuid, apikey):
     else:
         print("failed: ", response)
 
-        tempLog = "[" + ctime() + "] (api.py/start_app) Failed " + response.status_code
+        tempLog = "[" + time.ctime() + "] (api.py/start_app) Failed " + response.status_code
         log(tempLog)
 
         return False
