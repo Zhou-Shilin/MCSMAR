@@ -24,15 +24,15 @@ while True:
     status = api.get_status(url, uuid, remote_uuid, apikey)
 
     if status == 0:
-        tempLog = "[" + ctime() + "] (main.py) 检测到实例已停止, " + time_before_retart + "s后重启！"
+        tempLog = "[" + time.ctime() + "] (main.py) 检测到实例已停止, " + time_before_retart + "s后重启！"
         log(tempLog)
         time.sleep(time_before_restart)
         isStartedSuccessful = api.start_app(url, uuid, remote_uuid, apikey)
         if isStartedSuccessful == True:
-            tempLog = "[" + ctime() + "] (main.py) 实例启动成功！"
+            tempLog = "[" + time.ctime() + "] (main.py) 实例启动成功！"
             log()
         else:
-            tempLog = "[" + ctime() + "] (main.py) 实例启动失败！"
+            tempLog = "[" + time.ctime() + "] (main.py) 实例启动失败！"
             log(tempLog)
     else:
         pass
