@@ -15,7 +15,11 @@ def get_status(url, uuid, remote_uuid, apikey):
         "Content-Type": "application/json; charset=utf-8"
     }
 
-    response = requests.get(api_url, params=_params, headers=_headers)
+    try:
+        response = requests.get(api_url, params=_params, headers=_headers)
+    except:
+        tempLog = "[" + time.ctime() + "] (api.py/get_status) Failed sending request!"
+        return "failed"
 
     if response.status_code == 200:
         json_response = response.json()
@@ -37,7 +41,7 @@ def get_status(url, uuid, remote_uuid, apikey):
         return "failed"
 
 def start_app(url, uuid, remote_uuid, apikey):
-    api_url = url, "/api/protected_instance/open"
+    api_url = url + "/api/protected_instance/open"
 
     _params = {
         "uuid": uuid,
@@ -49,9 +53,16 @@ def start_app(url, uuid, remote_uuid, apikey):
         "Content-Type": "application/json; charset=utf-8"
     }
 
-    response = requests.get(api_url, params=_params, headers=_headers)
+    try:
+        response = requests.get(api_url, params=_params, headers=_headers)
+    except Exception as e:
+        tempLog = "[" + time.ctime() + "] (api.py/start_app) Failed sending request! ErrMsg:"
+        log(tempLog)
+        log(e)
+        return False
 
     if response.status_code == 200:
+        json_response = response.json()
         data = json_response["data"]
 
         tempLog = "[" + time.ctime() + "] (api.py/start_app) Successful 200, data="
