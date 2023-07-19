@@ -30,7 +30,7 @@ while True:
         isStartedSuccessful = api.start_app(url, uuid, remote_uuid, apikey)
         if isStartedSuccessful == True:
             tempLog = "[" + time.ctime() + "] (main.py) 实例启动成功！"
-            log()
+            log(tempLog)
         else:
             tempLog = "[" + time.ctime() + "] (main.py) 实例启动失败！"
             log(tempLog)
