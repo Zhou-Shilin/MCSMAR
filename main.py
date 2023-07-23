@@ -1,7 +1,8 @@
-import api
+from baimomcsm_api import applications as api
 import time
 import os
 from log_writer import log
+
 
 # 配置
 apikey = "" # 我的信息-API接口秘钥
@@ -16,23 +17,23 @@ try:
 except:
     prin("日志文件不存在！正在创建……")
 
-log("Start, MSCMAR 1.3 / BaimoQilin 2023")
-print("Start, MSCMAR 1.3 / BaimoQilin 2023")
+log("Start, MSCMAR 1.0 / BaimoQilin 2023")
+print("Start, MSCMAR 1.0 / BaimoQilin 2023")
 print("Ctrl+C 退出程序")
 
 while True:
     status = api.get_status(url, uuid, remote_uuid, apikey)
 
     if status == 0:
-        tempLog = "[" + time.ctime() + "] (main.py) 检测到实例已停止, " + time_before_restart + "s后重启！"
+        tempLog = "[" + ctime() + "] (main.py) 检测到实例已停止, " + time_before_retart + "s后重启！"
         log(tempLog)
         time.sleep(time_before_restart)
         isStartedSuccessful = api.start_app(url, uuid, remote_uuid, apikey)
         if isStartedSuccessful == True:
-            tempLog = "[" + time.ctime() + "] (main.py) 实例启动成功！"
-            log(tempLog)
+            tempLog = "[" + ctime() + "] (main.py) 实例启动成功！"
+            log()
         else:
-            tempLog = "[" + time.ctime() + "] (main.py) 实例启动失败！"
+            tempLog = "[" + ctime() + "] (main.py) 实例启动失败！"
             log(tempLog)
     else:
         pass
